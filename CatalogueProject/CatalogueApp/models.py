@@ -18,7 +18,7 @@ class Category(models.Model):
         return self.name
 
     def get_breadcrumbs(self):
-        """Returns the list of categories in order of inheritence"""
+        """Returns the list of categories in order of inheritance"""
         breadcrumbs = []
         category = self
         while category.parent_category is not None:
