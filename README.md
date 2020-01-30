@@ -1,49 +1,84 @@
-# Catalogue-Management-System
+Cab Allocation System
 
-Catalogue-management-system
+This application serves like a real time rides just like a customer can book a cab, available drivers can accept the rides and here only the customer can end the ride.
 
-Users will be able to create a product. A product has parameters like Brand, Category and Specifications. Products can be viewed on a listing page with filters of Brand and Category.
+Further Functionalities and Assumptions:
 
-Further explanations and assumptions:
-
-    Categories have a tree structure - similar to that of Amazon / Flipkart.
-    Each product can have multiple specifications. Specification params - Key, Value & Unit. Eg. Key - Length, Value: 30 , Unit - cm can be a specification for a scale.
-    Category breadcrumb should be displayed on the product page.
-    Product, Brand and Category names must be unique.
+    Each Customer can request only one cab at a time.
+    Each driver can accept only one ride at a time.
+    Every ride has 3 status : REQUESTED, ACCEPTED and DONE.
+    Customers and Drivers have unique names.
 
 Prerequisites
 
 You need to install the following packages for backend:
 
 asgiref==3.2.3
-Django==3.0.1
-django-cors-headers==3.2.0
-django-jsonfield==1.4.0
+Django==3.0.2
+django-cors-headers==3.2.1
 djangorestframework==3.11.0
 pkg-resources==0.0.0
+psycopg2==2.8.4
 pytz==2019.3
-six==1.13.0
 sqlparse==0.3.0
 
 Installing
 
 Clone the repository
 
-git clone https://github.com/sachins0023/Catalogue-management-system.git
+https://github.com/saurabhnk-94/cabAllocationSystem.git
 
 Setting up your virtual environment:
 
 python3 -m venv .env
 
-Activating Virtual Environment
+Activate the Virtual Environment:
 
 source .env/bin/activate
 
-Once the repository is cloned and virtual environment set up, go to the directory where the requirements.txt(Catalogue-management-system/backend/) is and type the following code in your terminal:
+Set Up a Database on local system: During the Postgres installation, an operating system user named postgres was created to correspond to the postgres PostgreSQL administrative user. We need to change to this user to perform administrative tasks:
 
-pip install requirements.txt
+sudo su - postgres
 
-Then to run the server, go to the directory 'Catalogue-management-system/backend/cms/' and type the following code in terminal:
+You should now be in a shell session for the postgres user. Log into a Postgres session by typing:
+
+psql
+
+First, we will create a database for our Django project. Each project should have its own isolated database for security reasons. We will call our database myproject in this guide, but it’s always better to select something more descriptive:
+
+CREATE DATABASE cabsystem;
+
+Remember to end all commands at an SQL prompt with a semicolon.
+
+Next, we will create a database user which we will use to connect to and interact with the database. Set the password to something strong and secure:
+
+CREATE USER cabsystemuser WITH PASSWORD 'cabsystem';
+
+Afterwards, we’ll modify a few of the connection parameters for the user we just created. This will speed up database operations so that the correct values do not have to be queried and set each time a connection is established.
+
+We are setting the default encoding to UTF-8, which Django expects. We are also setting the default transaction isolation scheme to “read committed”, which blocks reads from uncommitted transactions. Lastly, we are setting the timezone. By default, our Django projects will be set to use UTC:
+
+ALTER ROLE cabsystemuser SET client_encoding TO 'utf8';
+ALTER ROLE cabsystemuser SET default_transaction_isolation TO 'read committed';
+ALTER ROLE cabsystemuser SET timezone TO 'UTC';
+
+Now, all we need to do is give our database user access rights to the database we created:
+
+GRANT ALL PRIVILEGES ON DATABASE cabsystem TO cabsystemuser;
+
+Exit the SQL prompt to get back to the postgres user’s shell session:
+
+\q
+
+Exit out of the postgres user’s shell session to get back to your regular user’s shell session:
+
+exit
+
+After all these steps go to the backend directory(cabAllocationSystem/backend) and there you can find a file called requirement.txt and then type the following code in your terminal:
+
+pip install -r requirements.txt
+
+Then to run the server, go to the directory 'cabAllocationSystem/backend/cabSystem/' and type the following code in terminal :
 
 python3 manage.py runserver
 
@@ -51,25 +86,32 @@ Your server is set up with all the APIs active.
 
 For Frontend which is ReactJS, Dependencies are:
 
-"axios": "^0.19.0",
+"axios": "^0.19.1",
 "react": "^16.12.0",
 "react-dom": "^16.12.0",
 "react-redux": "^7.1.3",
+"react-router": "^5.1.2",
 "react-router-dom": "^5.1.2",
-"redux": "^4.0.4",
-"react-scripts": "0.9.5"
+"react-scripts": "0.9.5",
+"redux": "^4.0.5",
+"redux-thunk": "^2.3.0"
 
-Go to 'Catalogue-management-system/frontend/cms_ui/' and type the following code in the terminal:
+Kindly note redux is not implemented.
+
+Go to 'cabAllocationSystem/frontend/caballocationsystem/' and type the following code in the terminal:
 
 npm install
 
-Then to run the react server, type the code:
+Then to run the server, type the code in terminal:
 
 npm start
 
-The server has been set up and you are ready to go.
-While navigating through UI
+The server has been set up and you are up to work on the application.
 
-A few mock data has been added to the sqlite database that is attached with the product. Also Click on the different categories listed in Categories column to list products filtered on categories and similarly click on the different brands in Brands column to list products filtered on Brands.
+To make this project following Languages and Libraries have been used:
+Frontend : React Js;
+Backend : Python/Django;
+Database : PostgreSQL;
+Python : 3.6.8
 
 P.S:The aesthetics of the page is at the most basic level. Some more work could be put in to beautify the UI. The project has been completed keeping the sole aim as working completion rather than aesthetically pleasing.
