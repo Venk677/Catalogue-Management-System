@@ -28,23 +28,33 @@ Installing
 
 Clone the repository
 
-```https://github.com/saurabhnk-94/ECommerce-Inventory-Management-System.git```
+```
+https://github.com/saurabhnk-94/ECommerce-Inventory-Management-System.git
+```
 
 Setting up your virtual environment:
 
-```python3 -m venv .env```
+```
+python3 -m venv .env
+```
 
 Activating Virtual Environment
 
-```source .env/bin/activate```
+```
+source .env/bin/activate
+```
 
 Once the repository is cloned and virtual environment set up, go to the directory where the requirements.txt(ECommerce-Inventory-Management-System/backend/) is and type the following code in your terminal:
 
-```pip install requirements.txt```
+```
+pip install requirements.txt
+```
 
 Then to run the server, go to the directory 'ECommerce-Inventory-Management-System/backend/catalogueManagement/' and type the following code in terminal:
 
-```python3 manage.py runserver```
+```
+python3 manage.py runserver
+```
 
 Your server is set up with all the APIs active.
 
@@ -60,11 +70,15 @@ For Frontend which is ReactJS, Dependencies are:
 ```
 Go to 'ECommerce-Inventory-Management-System/frontend/catalogue/' and type the following code in the terminal:
 
-```npm install```
+```
+npm install
+```
 
 Then to run the react server, type the code:
 
-```npm start```
+```
+npm start
+```
 
 The server has been set up and you are ready to go. While navigating through UI
 
